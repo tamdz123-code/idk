@@ -41,4 +41,4 @@ createButton("Huy", UDim2.new(0.5, -150, 0.4, -25), "huycontrai1234", "huy ngáo
 createButton("Phong", UDim2.new(0.5, 50, 0.4, -25), "phong123", "xin chào Phong!", "m dell phải Phong")
 
 -- Tạo nút "Tâm"
-createButton("Tâm", UDim2.new(0.5, 100, 0.4, -25), "rei5awman", "xin chào người sáng tạo!", "m dell phải Tâm")
+createButton("Tâm", UDim2.new(0.5, -100, 0.4, -25), "rei5awman", "xin chào người sáng tạo!", "m dell phải Tâm")
