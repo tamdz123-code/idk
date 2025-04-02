@@ -1,0 +1,44 @@
+-- Tạo một ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "MyGui"
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Tạo một TextLabel để hiển thị chữ mặc định
+local textLabel = Instance.new("TextLabel")
+textLabel.Size = UDim2.new(0, 300, 0, 50) -- Kích thước của TextLabel
+textLabel.Position = UDim2.new(0.5, -150, 0.3, -25) -- Vị trí của TextLabel
+textLabel.Text = "Mày là ai"
+textLabel.TextColor3 = Color3.new(1, 1, 1) -- Màu chữ trắng
+textLabel.BackgroundTransparency = 1 -- Không có nền
+textLabel.TextScaled = true -- Giúp chữ tự động điều chỉnh kích thước
+textLabel.Parent = screenGui
+
+-- Hàm tạo nút
+local function createButton(name, position, correctName, successMessage, failureMessage)
+    local button = Instance.new("TextButton")
+    button.Size = UDim2.new(0, 100, 0, 50) -- Kích thước của nút
+    button.Position = position -- Vị trí của nút
+    button.Text = name -- Văn bản trên nút
+    button.TextColor3 = Color3.new(1, 1, 1) -- Màu chữ trắng
+    button.BackgroundColor3 = Color3.new(0, 0.5, 1) -- Màu nền của nút
+    button.Parent = screenGui
+
+    -- Thêm sự kiện khi nhấn nút
+    button.MouseButton1Click:Connect(function()
+        local playerName = game.Players.LocalPlayer.Name -- Lấy tên tài khoản của người chơi
+        if playerName == correctName then
+            textLabel.Text = successMessage -- Hiển thị thông điệp thành công
+        else
+            textLabel.Text = failureMessage -- Hiển thị thông điệp thất bại
+        end
+    end)
+end
+
+-- Tạo nút "Huy"
+createButton("Huy", UDim2.new(0.5, -150, 0.4, -25), "huycontrai1234", "huy ngáo", "m dell phải huy")
+
+-- Tạo nút "Phong"
+createButton("Phong", UDim2.new(0.5, 50, 0.4, -25), "phong123", "xin chào Phong!", "m dell phải Phong")
+
+-- Tạo nút "Tâm"
+createButton("Tâm", UDim2.new(0.5, -150, 0.5, -25), "rei5awman", "xin chào người sáng tạo!", "m dell phải Tâm")
