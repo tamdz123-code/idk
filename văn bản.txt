@@ -1,0 +1,62 @@
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "MyGui"
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+local textLabel = Instance.new("TextLabel")
+textLabel.Size = UDim2.new(0, 300, 0, 50)
+textLabel.Position = UDim2.new(0.5, -150, 0.3, -25)
+textLabel.Text = "Mày là ai"
+textLabel.TextColor3 = Color3.new(1, 1, 1)
+textLabel.BackgroundTransparency = 1
+textLabel.TextScaled = true
+textLabel.Parent = screenGui
+
+-- Function to create rainbow effect
+local colors = {Color3.fromRGB(255,0,0), Color3.fromRGB(255,127,0), Color3.fromRGB(255,255,0), Color3.fromRGB(0,255,0), Color3.fromRGB(0,0,255), Color3.fromRGB(75,0,130), Color3.fromRGB(148,0,211)}
+local currentIndex = 1
+
+local function updateTextColor()
+    textLabel.TextColor3 = colors[currentIndex]
+    currentIndex = currentIndex % #colors + 1
+end
+
+local rainbowConnection
+rainbowConnection = game:GetService("RunService").RenderStepped:Connect(function()
+    updateTextColor()
+end)
+
+local function createButton(name, position, correctName, successMessage, failureMessage)
+    local button = Instance.new("TextButton")
+    button.Size = UDim2.new(0, 100, 0, 50)
+    button.Position = position
+    button.Text = name
+    button.TextColor3 = Color3.new(1, 1, 1)
+    button.BackgroundColor3 = Color3.new(0, 0.5, 1)
+    button.Parent = screenGui
+
+    button.MouseButton1Click:Connect(function()
+        local playerName = game.Players.LocalPlayer.Name
+        if playerName == correctName then
+            textLabel.Text = successMessage
+        else
+            textLabel.Text = failureMessage
+        end
+    end)
+end
+
+createButton("Huy", UDim2.new(0.5, -150, 0.4, -25), "huycontrai1234", "huy ngáo", "m dell phải huy")
+createButton("Phong", UDim2.new(0.5, 50, 0.4, -25), "phong123", "xin chào Phong!", "m dell phải Phong")
+createButton("Tâm", UDim2.new(0.5, -150, 0.5, -25), "rei5awman", "xin chào người sáng tạo!", "m dell phải Tâm")
+
+-- Create a red X button
+local clearButton = Instance.new("TextButton")
+clearButton.Size = UDim2.new(0, 50, 0, 50)
+clearButton.Position = UDim2.new(0.9, -25, 0.1, -25)
+clearButton.Text = "X"
+clearButton.TextColor3 = Color3.new(1, 1, 1)
+clearButton.BackgroundColor3 = Color3.new(1, 0, 0)
+clearButton.Parent = screenGui
+
+clearButton.MouseButton1Click:Connect(function()
+    textLabel.Text = ""
+end)
