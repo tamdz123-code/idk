@@ -1,0 +1,100 @@
+-- Hiển thị thông báo Roblox ngay khi execute script
+local StarterGui = game:GetService("StarterGui")
+
+local function showRobloxNotification(title: string, text: string, duration: number?)
+    local success, error = pcall(function()
+        StarterGui:SetCore("SendNotification", {
+            Title = title;
+            Text = text;
+            Duration = duration or 5  -- Thời gian hiển thị (mặc định 5s)
+        })
+    end)
+    if not success then
+        warn("Lỗi hiển thị thông báo Roblox: " .. tostring(error))
+    end
+end
+
+-- Gọi thông báo Roblox ngay khi script chạy
+showRobloxNotification("Chào mừng sử dụng script", "Script được làm bởi Tâm đẹp zai (hơn thg phong)", 10)
+
+-- Tạo GUI
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "NotificationDemo"
+screenGui.Parent = game.Players.LocalPlayer.PlayerGui
+
+local button = Instance.new("TextButton")
+button.Size = UDim2.new(0, 20, 0, 20)
+button.Position = UDim2.new(0.5, -100, 0.5, -25)
+button.Text = "fake tb"
+button.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+button.TextColor3 = Color3.fromRGB(255, 255, 255)
+button.Font = Enum.Font.SourceSansBold
+button.TextSize = 20
+button.Parent = screenGui
+button.Draggable = true
+button.Active = true
+
+local line1 = Instance.new("TextLabel")
+line1.Size = UDim2.new(0, 750, 0, 40)
+line1.Position = UDim2.new(0.5, 0, 0.2, 0)
+line1.AnchorPoint = Vector2.new(0.5, 0.5)
+line1.BackgroundTransparency = 1
+line1.Text = "<font color=\"rgb(0, 255, 0)\">Bạn đã tìm được trái Blox</font><font color=\"rgb(255, 0, 0)\">! Hãy cẩn thận,nếu bạn chết trước khi</font>"
+line1.TextColor3 = Color3.fromRGB(255, 255, 255)
+line1.TextStrokeTransparency = 0
+line1.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+line1.Font = Enum.Font.Code
+line1.TextSize = 30
+line1.RichText = true
+line1.Visible = false
+line1.Parent = screenGui
+
+local line2 = Instance.new("TextLabel")
+line2.Size = UDim2.new(0, 600, 0, 30)
+line2.Position = UDim2.new(0.5, 0, 0.2, 20)
+line2.AnchorPoint = Vector2.new(0.5, 0.5)
+line2.BackgroundTransparency = 1
+line2.Text = "<font color=\"rgb(255, 0, 0)\">nó sẽ biến mất khỏi ba-lô nếu bạn ăn nó!</font>"
+line2.TextColor3 = Color3.fromRGB(255, 255, 255)
+line2.TextStrokeTransparency = 0
+line2.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+line2.Font = Enum.Font.Code
+line2.TextSize = 23
+line2.RichText = true
+line2.Visible = false
+line2.Parent = screenGui
+
+-- Hàm hiển thị thông báo nhặt trái (custom TextLabel) khi bấm nút
+local function showCustomNotification()
+    line1.Visible = true
+    line2.Visible = true
+    line1.TextTransparency = 1
+    line1.TextStrokeTransparency = 1
+    line2.TextTransparency = 1
+    line2.TextStrokeTransparency = 1
+
+    local tweenService = game:GetService("TweenService")
+    pcall(function()
+        local tweenIn1 = tweenService:Create(line1, TweenInfo.new(0.5), {TextTransparency = 0, TextStrokeTransparency = 0})
+        local tweenIn2 = tweenService:Create(line2, TweenInfo.new(0.5), {TextTransparency = 0, TextStrokeTransparency = 0})
+        tweenIn1:Play()
+        tweenIn2:Play()
+    end)
+
+    task.wait(5)  -- Tối ưu: task.wait thay wait
+
+    pcall(function()
+        local tweenOut1 = tweenService:Create(line1, TweenInfo.new(0.5), {TextTransparency = 1, TextStrokeTransparency = 1})
+        local tweenOut2 = tweenService:Create(line2, TweenInfo.new(0.5), {TextTransparency = 1, TextStrokeTransparency = 1})
+        tweenOut1:Play()
+        tweenOut2:Play()
+        tweenOut2.Completed:Wait()
+    end)
+    line1.Visible = false
+    line2.Visible = false
+end
+
+-- Kết nối sự kiện bấm nút: Gọi thông báo nhặt trái (custom)
+button.MouseButton1Click:Connect(showCustomNotification)
+
+print("Script loaded. Thông báo Roblox đã hiện khi execute. Bấm nút 'fake tb' để hiện thông báo nhặt trái.")
