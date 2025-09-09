@@ -15,7 +15,7 @@ local function showRobloxNotification(title: string, text: string, duration: num
 end
 
 -- Gọi thông báo Roblox ngay khi script chạy
-showRobloxNotification("Chào mừng sử dụng ", "kịch bản được làm bởi Tâm đẹp zai (hơn thg phong)", 10)
+showRobloxNotification("Chào mừng sử dụng ", "kịch bản được làm bởi Tâm đẹp zai (hơn thg phong)", 15)
 
 -- Tạo GUI
 local screenGui = Instance.new("ScreenGui")
@@ -36,7 +36,7 @@ button.Active = true
 
 local line1 = Instance.new("TextLabel")
 line1.Size = UDim2.new(0, 750, 0, 40)
-line1.Position = UDim2.new(0.5, 0, 0.2, 0)
+line1.Position = UDim2.new(0.4, 0, 0.2, 0)
 line1.AnchorPoint = Vector2.new(0.5, 0.5)
 line1.BackgroundTransparency = 1
 line1.Text = "<font color=\"rgb(0, 255, 0)\">Bạn đã tìm được trái Blox</font><font color=\"rgb(255, 0, 0)\">! Hãy cẩn thận,nếu bạn chết trước khi</font>"
