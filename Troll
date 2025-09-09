@@ -2,4 +2,4 @@
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 
-LocalPlayer:Kick("You have been permanently banned from the game.\nReason: Unauthorized script execution.\n(Error Code: 267)")
+LocalPlayer:Kick("Bạn đã bị cấm vĩnh viễn khỏi trò chơi.\nReason: cheating/exploiting detected.\n(Error Code: 267)")
