@@ -50,7 +50,7 @@ line1.Visible = false
 line1.Parent = screenGui
 
 local line2 = Instance.new("TextLabel")
-line2.Size = UDim2.new(0, 600, 0, 30)
+line2.Size = UDim2.new(0, 650, 0, 30)
 line2.Position = UDim2.new(0.5, 0, 0.2, 20)
 line2.AnchorPoint = Vector2.new(0.5, 0.5)
 line2.BackgroundTransparency = 1
